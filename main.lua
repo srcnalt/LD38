@@ -136,14 +136,13 @@ function love.update(dt)
 			state = states.select
 		end
 
-		if SCALE == 3 and love.keyboard.isDown("k") then
-			SCALE = 2
-			screen.w = 512 * SCALE
-			screen.h = 256 * SCALE
-			love.window.setMode(screen.w, screen.h, {fullscreen = false, centered = true})
-			love.load()
-		elseif SCALE == 2 and love.keyboard.isDown("k") then
-			SCALE = 3
+		if love.keyboard.isDown("s") then
+			if SCALE == 3 then
+				SCALE = 1
+			else
+				SCALE = SCALE + 1
+			end
+
 			screen.w = 512 * SCALE
 			screen.h = 256 * SCALE
 			love.window.setMode(screen.w, screen.h, {fullscreen = false, centered = true})
@@ -175,8 +174,8 @@ function love.update(dt)
 		nextdayTime = nextdayTime + dt
 
 		if nextdayTime > 1 then
-			nextDay()
 			state = states.select
+			nextDay()
 		end
 	elseif state == states.endgame then
 		if lk.isDown("space") then
